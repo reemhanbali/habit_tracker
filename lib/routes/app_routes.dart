@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:habits_tracker_app/features/dashboard/screens/dashboard_screen.dart';
-import 'package:habits_tracker_app/features/onboarding/screens/onboarding_screen.dart';
+import 'package:habits_tracker_app/features/onboarding/presentation/onboarding_screen.dart';
 import 'package:habits_tracker_app/features/user_authentication/login_screen.dart';
 
 class AppRoutes {

@@ -1,11 +1,13 @@
-import 'dart:ui';
+import 'package:flutter/material.dart';
+
+import 'package:habits_tracker_app/core/theme/app_dimens.dart';
 
 class AppTextStyles {
   static const String fontFamily = "Montserrat";
 
   static TextStyle headline1 = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 48,
+    fontSize: AppDimens.size48,
     fontWeight: FontWeight.w700, // Bold
     letterSpacing: -1,
     height: 56,
@@ -13,7 +15,7 @@ class AppTextStyles {
 
   static TextStyle headline2 = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 40,
+    fontSize: AppDimens.size40,
     fontWeight: FontWeight.w700, // Bold
     letterSpacing: -1,
     height: 48,
@@ -21,7 +23,7 @@ class AppTextStyles {
 
   static TextStyle headline3 = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 36,
+    fontSize: AppDimens.size36,
     fontWeight: FontWeight.w700, // Bold
     letterSpacing: -1,
     height: 40,
@@ -29,7 +31,7 @@ class AppTextStyles {
 
   static TextStyle headline4 = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 32,
+    fontSize: AppDimens.size32,
     fontWeight: FontWeight.w700, // Bold
     letterSpacing: -1,
     height: 40,
@@ -37,7 +39,7 @@ class AppTextStyles {
 
   static TextStyle headline5 = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 24,
+    fontSize: AppDimens.size24,
     fontWeight: FontWeight.w700, // Bold
     letterSpacing: -1,
     height: 32,
@@ -45,7 +47,7 @@ class AppTextStyles {
 
   static TextStyle headline6 = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 20,
+    fontSize: AppDimens.size20,
     fontWeight: FontWeight.w500, // Medium
     letterSpacing: 0,
     height: 24,
@@ -53,7 +55,7 @@ class AppTextStyles {
 
   static TextStyle title = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 18,
+    fontSize: AppDimens.size18,
     fontWeight: FontWeight.w500, // Medium
     letterSpacing: 0,
     height: 24,
@@ -61,7 +63,7 @@ class AppTextStyles {
 
   static TextStyle paragraphBook = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 14,
+    fontSize: AppDimens.size14,
     fontWeight: FontWeight.w400, // Book or Regular
     letterSpacing: 0,
     height: 20,
@@ -69,7 +71,7 @@ class AppTextStyles {
 
   static TextStyle paragraphMedium = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 14,
+    fontSize: AppDimens.size14,
     fontWeight: FontWeight.w500, // Medium
     letterSpacing: 0,
     height: 20,
@@ -77,7 +79,7 @@ class AppTextStyles {
 
   static TextStyle alternative = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 12,
+    fontSize: AppDimens.size12,
     fontWeight: FontWeight.w400, // Book or Regular
     letterSpacing: 0,
     height: 16,
@@ -85,7 +87,7 @@ class AppTextStyles {
 
   static TextStyle chip = TextStyle(
     fontFamily: fontFamily,
-    fontSize: 10,
+    fontSize: AppDimens.size10,
     fontWeight: FontWeight.w700, // Bold
     letterSpacing: 1,
     height: 16,
