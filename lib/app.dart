@@ -1,9 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:habits_tracker_app/routes/app_routes.dart';
 
 class MyApp extends StatelessWidget {
-
   const MyApp({super.key, required this.hasSeenOnboarding});
 
   final bool hasSeenOnboarding;
@@ -13,8 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Habit Tracker',
-            debugShowCheckedModeBanner: false,
-
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
