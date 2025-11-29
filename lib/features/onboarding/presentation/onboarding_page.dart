@@ -23,27 +23,24 @@ class OnboardingPage extends StatelessWidget {
               fit: BoxFit.contain,
             ),
           ),
-          Expanded(
-            flex: 1,
-            child: Column(
-              children: [
-                Text(
-                  page.title,
-                  softWrap: true,
-                  style: AppTextStyles.headline2.copyWith(
-                    color: AppColors.primaryBaseWhite,
-                  ),
+          Column(
+            children: [
+              Text(
+                page.title,
+                softWrap: true,
+                style: AppTextStyles.headline2.copyWith(
+                  color: AppColors.primaryBaseWhite,
                 ),
-                SizedBox(height: AppDimensions.spacingSmall),
-                Text(
-                  page.description,
-                  softWrap: true,
-                  style: AppTextStyles.paragraphMedium.copyWith(
-                    color: AppColors.primaryBlue20,
-                  ),
+              ),
+              SizedBox(height: AppDimensions.spacingSmall),
+              Text(
+                page.description,
+                softWrap: true,
+                style: AppTextStyles.paragraphMedium.copyWith(
+                  color: AppColors.primaryBlue20,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ],
       ),

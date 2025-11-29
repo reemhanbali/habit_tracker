@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:habits_tracker_app/core/theme/app_colors.dart';
+import 'package:habits_tracker_app/core/theme/app_dimensions.dart';
 import 'package:habits_tracker_app/core/theme/app_gradients.dart';
 import 'package:habits_tracker_app/features/onboarding/presentation/models/onboarding_page_ui_model.dart';
 import 'package:habits_tracker_app/features/onboarding/presentation/onboarding_page.dart';
 import 'package:habits_tracker_app/features/onboarding/repository/onboarding_repository.dart';
+import 'package:habits_tracker_app/features/onboarding/widgets/dot_indicators.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -12,7 +15,9 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  final PageController _pageController = PageController();
+  int _currentPage = 0;
+
+  final PageController _pageController = PageController(initialPage: 0);
   final List<OnboardingPageUiModel> _pages = [
     OnboardingPageUiModel(
       illustration: "assets/images/illustration1",
@@ -33,54 +38,99 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           "Find friends to discuss common topics. Complete challenges together.",
     ),
   ];
-
-  int _currentPage = 0;
   static const int _animDuration = 300;
 
   final OnboardingRepository _repository = OnboardingRepository();
 
-  void _nextPage() {
-    if (_currentPage < 3) {
-      _pageController.nextPage(
-        duration: Duration(microseconds: _animDuration),
-        curve: Curves.easeInCubic,
-      );
-    } else {
-      _repository.completeOnboarding();
-      // go to auth screen
-    }
+  void _nextPage(int pageIndex) {
+    // Move PageView first
+    _pageController.animateToPage(
+      pageIndex,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeIn,
+    );
+
+    // Update _currentPage so UI (dots) rebuilds
+    setState(() {
+      _currentPage = pageIndex;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        alignment: AlignmentGeometry.center,
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-              gradient: AppGradients.blueGradient,
+      body: Container(
+        decoration: const BoxDecoration(gradient: AppGradients.blueGradient),
+        child: Stack(
+          alignment: AlignmentGeometry.center,
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Expanded(
+                  flex: 3,
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            top: MediaQuery.of(context).padding.top,
+                          ),
+                          child: PageView.builder(
+                            itemCount: _pages.length,
+                            controller: _pageController,
+                            onPageChanged: (value) =>
+                                setState(() => _currentPage = value),
+                            itemBuilder: (context, index) {
+                              final page = _pages[index];
+                              return OnboardingPage(page: page);
+                            },
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: AppDimensions.spacingSmall),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: AppDimensions.spacingMedium,
+                        ),
+                        child: DotIndicators(
+                          currentPage: _currentPage,
+                          pageCount: _pages.length,
+                          onDotTap: (index) {
+                            _pageController.animateToPage(
+                              index,
+                              duration: const Duration(milliseconds: 300),
+                              curve: Curves.easeInOut,
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                Column(
+                  children: [
+                    TextButton(onPressed: () {}, child: Text("button1")),
+                    Row(
+                      children: [
+                        TextButton(onPressed: () {}, child: Text("button2")),
+                        TextButton(onPressed: () {}, child: Text("button3")),
+                        TextButton(onPressed: () {}, child: Text("button3")),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
             ),
-            child: Padding(
-              padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-              child: PageView.builder(
-                itemCount: _pages.length,
-                controller: _pageController,
-                onPageChanged: (value) => setState(() => _currentPage = value),
-                itemBuilder: (context, index) {
-                  final page = _pages[index];
-                  return OnboardingPage(page: page);
-                },
-              ),
-            ),
-          ),
-          /*  Image.asset(
-            'assets/images/circle_bg.png',
-            width: 400,
-            height: 400,
-            fit: BoxFit.cover,
-          ), */
-        ],
+
+            /*  Image.asset(
+              'assets/images/circle_bg.png',
+              width: 400,
+              height: 400,
+              fit: BoxFit.cover,
+            ), */
+          ],
+        ),
       ),
     );
   }
