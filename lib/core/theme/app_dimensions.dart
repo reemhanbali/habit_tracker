@@ -1,5 +1,6 @@
 class AppDimensions {
   // Padding / Margin
+  static const double spacingXSmall = 4.0;
   static const double spacingSmall = 8.0;
   static const double spacingMedium = 16.0;
   static const double spacingLarge = 24.0;

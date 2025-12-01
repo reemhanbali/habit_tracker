@@ -48,6 +48,7 @@ class AppColors {
 
   static const Color primaryBaseWhite = Color(0xFFFFFFFF);
   static const Color primaryBaseBlack = Color(0xFF000000);
+  static const Color primaryBaseBackground = Color(0xFFF6F9FF);
 
   // ----- SECONDARY COLORS -----
   static const Color secondaryOrange10 = Color(0xFFFEEEE9);
@@ -99,7 +100,6 @@ class AppColors {
   static const Color gradientBlueStop0 = Color(0xFF6B73FF);
   static const Color gradientBlueStop100 = Color(0xFF000DFF);
 }
-
 
 /*class _SecondaryColors {
 

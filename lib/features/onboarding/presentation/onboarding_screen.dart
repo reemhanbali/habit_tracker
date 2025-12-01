@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:habits_tracker_app/core/theme/app_colors.dart';
 import 'package:habits_tracker_app/core/theme/app_dimensions.dart';
 import 'package:habits_tracker_app/core/theme/app_gradients.dart';
+import 'package:habits_tracker_app/core/theme/app_text_styles.dart';
+import 'package:habits_tracker_app/core/widgets/models/button_size.dart';
+import 'package:habits_tracker_app/core/widgets/secondary_button.dart';
 import 'package:habits_tracker_app/features/onboarding/presentation/models/onboarding_page_ui_model.dart';
 import 'package:habits_tracker_app/features/onboarding/presentation/onboarding_page.dart';
 import 'package:habits_tracker_app/features/onboarding/repository/onboarding_repository.dart';
-import 'package:habits_tracker_app/features/onboarding/widgets/dot_indicators.dart';
+import 'package:habits_tracker_app/features/onboarding/widgets/onboarding_page_view.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -68,57 +72,84 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Expanded(
-                  flex: 3,
+                  flex: 2,
+                  child: OnboardingPageView(
+                    controller: _pageController,
+                    currentPage: _currentPage,
+                    pages: _pages
+                        .map((page) => OnboardingPage(page: page))
+                        .toList(),
+                    onPageChanged: (index) {
+                      setState(() => _currentPage = index);
+                    },
+                    onDotTap: (index) {
+                      _pageController.animateToPage(
+                        index,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeInOut,
+                      );
+                    },
+                  ),
+                ),
+                SizedBox(height: AppDimensions.spacingMedium),
+                Padding(
+                  padding: const EdgeInsets.all(AppDimensions.spacingMedium),
                   child: Column(
                     children: [
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.only(
-                            top: MediaQuery.of(context).padding.top,
-                          ),
-                          child: PageView.builder(
-                            itemCount: _pages.length,
-                            controller: _pageController,
-                            onPageChanged: (value) =>
-                                setState(() => _currentPage = value),
-                            itemBuilder: (context, index) {
-                              final page = _pages[index];
-                              return OnboardingPage(page: page);
-                            },
-                          ),
+                      SecondaryButton(
+                        text: "Continue with E-mail",
+                        icon: SvgPicture.asset("assets/images/ic_login.svg"),
+                        buttonSize: ButtonSize.large,
+                        fullWidth: true,
+                        onTap: () {},
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          top: AppDimensions.spacingMedium,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            SecondaryButton(
+                              text: "Apple",
+                              icon: SvgPicture.asset(
+                                "assets/images/ic_apple.svg",
+                              ),
+                              buttonSize: ButtonSize.small,
+                              onTap: () {},
+                            ),
+                            SizedBox(width: AppDimensions.spacingSmall),
+                            SecondaryButton(
+                              text: "Google",
+                              icon: SvgPicture.asset(
+                                "assets/images/ic_google.svg",
+                              ),
+                              buttonSize: ButtonSize.small,
+                              onTap: () {},
+                            ),
+                            SizedBox(width: AppDimensions.spacingSmall),
+                            Expanded(
+                              child: SecondaryButton(
+                                text: "Facebook",
+                                icon: SvgPicture.asset(
+                                  "assets/images/ic_facebook.svg",
+                                ),
+                                buttonSize: ButtonSize.small,
+                                onTap: () {},
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(height: AppDimensions.spacingSmall),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: AppDimensions.spacingMedium,
-                        ),
-                        child: DotIndicators(
-                          currentPage: _currentPage,
-                          pageCount: _pages.length,
-                          onDotTap: (index) {
-                            _pageController.animateToPage(
-                              index,
-                              duration: const Duration(milliseconds: 300),
-                              curve: Curves.easeInOut,
-                            );
-                          },
+                      Text(
+                        "By continuing you agree Terms of Services & Privacy Policy",
+                        style: AppTextStyles.alternative.copyWith(
+                          color: AppColors.primaryBlue40,
                         ),
                       ),
                     ],
                   ),
-                ),
-                Column(
-                  children: [
-                    TextButton(onPressed: () {}, child: Text("button1")),
-                    Row(
-                      children: [
-                        TextButton(onPressed: () {}, child: Text("button2")),
-                        TextButton(onPressed: () {}, child: Text("button3")),
-                        TextButton(onPressed: () {}, child: Text("button3")),
-                      ],
-                    ),
-                  ],
                 ),
               ],
             ),
