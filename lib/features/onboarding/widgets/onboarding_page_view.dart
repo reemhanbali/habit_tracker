@@ -28,7 +28,9 @@ class OnboardingPageView extends StatelessWidget {
             child: PageView.builder(
               itemCount: pages.length,
               controller: controller,
-              onPageChanged: (value) => onPageChanged,
+              onPageChanged: (value) {
+                onPageChanged?.call(value); // call the callback with new page
+              },
               itemBuilder: (_, index) => pages[index],
             ),
           ),

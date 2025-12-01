@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:habits_tracker_app/core/theme/app_colors.dart';
 import 'package:habits_tracker_app/core/theme/app_dimensions.dart';
 import 'package:habits_tracker_app/core/theme/app_gradients.dart';
+import 'package:habits_tracker_app/core/theme/app_icons.dart';
 import 'package:habits_tracker_app/core/theme/app_text_styles.dart';
 import 'package:habits_tracker_app/core/widgets/models/button_size.dart';
 import 'package:habits_tracker_app/core/widgets/secondary_button.dart';
@@ -10,6 +11,7 @@ import 'package:habits_tracker_app/features/onboarding/presentation/models/onboa
 import 'package:habits_tracker_app/features/onboarding/presentation/onboarding_page.dart';
 import 'package:habits_tracker_app/features/onboarding/repository/onboarding_repository.dart';
 import 'package:habits_tracker_app/features/onboarding/widgets/onboarding_page_view.dart';
+import 'package:habits_tracker_app/routes/app_routes.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -88,6 +90,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         duration: const Duration(milliseconds: 300),
                         curve: Curves.easeInOut,
                       );
+
+                      setState(() => _currentPage = index);
                     },
                   ),
                 ),
@@ -98,10 +102,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     children: [
                       SecondaryButton(
                         text: "Continue with E-mail",
-                        icon: SvgPicture.asset("assets/images/ic_login.svg"),
+                        icon: SvgPicture.asset(AppIcons.login),
                         buttonSize: ButtonSize.large,
                         fullWidth: true,
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, AppRoutes.auth);
+                        },
                       ),
                       Padding(
                         padding: const EdgeInsets.only(
@@ -112,18 +118,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           children: [
                             SecondaryButton(
                               text: "Apple",
-                              icon: SvgPicture.asset(
-                                "assets/images/ic_apple.svg",
-                              ),
+                              icon: SvgPicture.asset(AppIcons.apple),
                               buttonSize: ButtonSize.small,
                               onTap: () {},
                             ),
                             SizedBox(width: AppDimensions.spacingSmall),
                             SecondaryButton(
                               text: "Google",
-                              icon: SvgPicture.asset(
-                                "assets/images/ic_google.svg",
-                              ),
+                              icon: SvgPicture.asset(AppIcons.google),
                               buttonSize: ButtonSize.small,
                               onTap: () {},
                             ),
@@ -131,9 +133,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             Expanded(
                               child: SecondaryButton(
                                 text: "Facebook",
-                                icon: SvgPicture.asset(
-                                  "assets/images/ic_facebook.svg",
-                                ),
+                                icon: SvgPicture.asset(AppIcons.facebook),
                                 buttonSize: ButtonSize.small,
                                 onTap: () {},
                               ),

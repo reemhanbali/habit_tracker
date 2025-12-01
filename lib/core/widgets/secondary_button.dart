@@ -106,5 +106,4 @@ class SecondaryButton extends StatelessWidget {
   static double _largeHeight = 52;
   static double _buttonRadius = 40;
   static double _iconSize = 20;
-  static double _gap = 2;
 }

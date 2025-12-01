@@ -1,0 +1,1 @@
+enum IconButtonType { icon, emoji }

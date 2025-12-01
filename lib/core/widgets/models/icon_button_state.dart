@@ -1,0 +1,1 @@
+enum IconButtonState { normal, active }
