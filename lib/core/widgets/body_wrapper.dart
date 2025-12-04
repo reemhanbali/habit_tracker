@@ -10,13 +10,14 @@ class BodyWrapper extends StatelessWidget {
     super.key,
     required this.child,
     this.includeBottomPadding = false,
-    this.backgroundColor = AppColors.primaryBlack10,
+    this.backgroundColor = AppColors.primaryBaseBackground,
   });
 
   @override
   Widget build(BuildContext context) {
     final padding = MediaQuery.of(context).padding;
     return Container(
+      width: double.infinity,
       color: backgroundColor,
       child: Padding(
         padding: EdgeInsets.only(

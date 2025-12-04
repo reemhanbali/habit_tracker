@@ -8,6 +8,7 @@ import 'package:habits_tracker_app/core/widgets/header.dart';
 import 'package:habits_tracker_app/core/widgets/labeled_text_input.dart';
 import 'package:habits_tracker_app/core/widgets/models/button_size.dart';
 import 'package:habits_tracker_app/core/widgets/primary_button.dart';
+import 'package:habits_tracker_app/routes/app_routes.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -20,7 +21,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.primaryBaseWhite,
       appBar: Header(
         title: "Continue with E-mail",
         leftIcon: AppIconType.arrowLeft.assetPath,
@@ -87,9 +87,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       textStyle: AppTextStyles.paragraphMedium,
                       foregroundColor: AppColors.primaryBlue100,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, AppRoutes.createAccount);
+                    },
                     child: Text("Dont't have account? Let's create!"),
                   ),
+                  SizedBox(height: AppDimensions.spacingXSmall),
                   PrimaryButton(
                     text: "Next",
                     fullWidth: true,
