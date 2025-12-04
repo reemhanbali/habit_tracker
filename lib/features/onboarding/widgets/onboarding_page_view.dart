@@ -23,16 +23,13 @@ class OnboardingPageView extends StatelessWidget {
     return Column(
       children: [
         Expanded(
-          child: Padding(
-            padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-            child: PageView.builder(
-              itemCount: pages.length,
-              controller: controller,
-              onPageChanged: (value) {
-                onPageChanged?.call(value); // call the callback with new page
-              },
-              itemBuilder: (_, index) => pages[index],
-            ),
+          child: PageView.builder(
+            itemCount: pages.length,
+            controller: controller,
+            onPageChanged: (value) {
+              onPageChanged?.call(value); // call the callback with new page
+            },
+            itemBuilder: (_, index) => pages[index],
           ),
         ),
         SizedBox(height: AppDimensions.spacingSmall),

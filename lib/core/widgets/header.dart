@@ -3,11 +3,16 @@ import 'package:flutter_svg/svg.dart';
 import 'package:habits_tracker_app/core/theme/app_colors.dart';
 import 'package:habits_tracker_app/core/theme/app_dimensions.dart';
 import 'package:habits_tracker_app/core/theme/app_text_styles.dart';
+import 'package:habits_tracker_app/core/widgets/icon_button.dart';
+import 'package:habits_tracker_app/core/widgets/models/icon_button_size.dart';
 
 class Header extends StatelessWidget implements PreferredSizeWidget {
-  final Widget? title;
-  final Widget? leftIcon;
-  final Widget? rightIcon;
+  final String? title;
+  final String? leftIcon;
+  final String? rightIcon;
+  final VoidCallback? onLeftIconTap;
+  final VoidCallback? onRightIconTap;
+
   /*  final bool showSegmentControl;
   final bool showProfile;
   final bool showTopContent;
@@ -18,6 +23,8 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
     this.title,
     this.leftIcon,
     this.rightIcon,
+    this.onLeftIconTap,
+    this.onRightIconTap,
     /*  this.showSegmentControl = false,
     this.showProfile = false,
     this.showTopContent = false,
@@ -26,24 +33,50 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-      automaticallyImplyLeading: false,
-      title: Row(
-        children: [
-          if (leftIcon != null) leftIcon!,
-          if (title != null) title!,
-          if (rightIcon != null) rightIcon!,
-        ],
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          bottom: BorderSide(color: AppColors.primaryBlack10, width: 1),
+        ),
       ),
-      centerTitle: true,
-      titleTextStyle: AppTextStyles.headline5.copyWith(
-        color: AppColors.primaryBlack100,
+      child: AppBar(
+        backgroundColor: AppColors.primaryBaseWhite,
+        automaticallyImplyLeading: false,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          spacing: AppDimensions.spacingSmall,
+          children: [
+            if (leftIcon != null)
+              CustomIconButton(
+                icon: leftIcon!,
+                iconButtonSize: IconButtonSize.large,
+                onTap: () {
+                  if (onLeftIconTap != null) {
+                    onLeftIconTap!(); // call the callback
+                  } else {
+                    Navigator.pop(context); // default action
+                  }
+                },
+              ),
+            if (title != null) Text(title!),
+            if (rightIcon != null)
+              CustomIconButton(
+                icon: rightIcon!,
+                onTap: onRightIconTap,
+                iconButtonSize: IconButtonSize.large,
+              ),
+          ],
+        ),
+        titleTextStyle: AppTextStyles.headline5.copyWith(
+          color: AppColors.primaryBlack100,
+        ),
+        titleSpacing: AppDimensions.spacingMedium,
       ),
-      titleSpacing: AppDimensions.spacingMedium,
-      actions: rightIcon == null ? [] : [rightIcon!],
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(_headerHeight);
+
+  static const double _headerHeight = 60;
 }

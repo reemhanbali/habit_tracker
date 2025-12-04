@@ -9,6 +9,8 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final padding = MediaQuery.of(context).padding;
+
     return MaterialApp(
       title: 'Habit Tracker',
       debugShowCheckedModeBanner: false,

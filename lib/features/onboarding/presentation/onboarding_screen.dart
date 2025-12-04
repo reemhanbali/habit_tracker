@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:habits_tracker_app/core/theme/app_colors.dart';
 import 'package:habits_tracker_app/core/theme/app_dimensions.dart';
 import 'package:habits_tracker_app/core/theme/app_gradients.dart';
-import 'package:habits_tracker_app/core/theme/app_icons.dart';
+import 'package:habits_tracker_app/core/theme/app_icon_type.dart';
 import 'package:habits_tracker_app/core/theme/app_text_styles.dart';
 import 'package:habits_tracker_app/core/widgets/models/button_size.dart';
 import 'package:habits_tracker_app/core/widgets/secondary_button.dart';
@@ -102,7 +102,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     children: [
                       SecondaryButton(
                         text: "Continue with E-mail",
-                        icon: SvgPicture.asset(AppIcons.login),
+                        icon: SvgPicture.asset(AppIconType.login.assetPath),
                         buttonSize: ButtonSize.large,
                         fullWidth: true,
                         onTap: () {
@@ -118,14 +118,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           children: [
                             SecondaryButton(
                               text: "Apple",
-                              icon: SvgPicture.asset(AppIcons.apple),
+                              icon: SvgPicture.asset(
+                                AppIconType.apple.assetPath,
+                              ),
                               buttonSize: ButtonSize.small,
                               onTap: () {},
                             ),
                             SizedBox(width: AppDimensions.spacingSmall),
                             SecondaryButton(
                               text: "Google",
-                              icon: SvgPicture.asset(AppIcons.google),
+                              icon: SvgPicture.asset(
+                                AppIconType.google.assetPath,
+                              ),
                               buttonSize: ButtonSize.small,
                               onTap: () {},
                             ),
@@ -133,7 +137,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             Expanded(
                               child: SecondaryButton(
                                 text: "Facebook",
-                                icon: SvgPicture.asset(AppIcons.facebook),
+                                icon: SvgPicture.asset(
+                                  AppIconType.facebook.assetPath,
+                                ),
                                 buttonSize: ButtonSize.small,
                                 onTap: () {},
                               ),
