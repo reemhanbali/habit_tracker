@@ -32,7 +32,6 @@ class LabeledTextInput extends StatefulWidget {
 class _LabeledTextInputState extends State<LabeledTextInput> {
   late final TextEditingController _controller;
   late final FocusNode _focusNode;
-  bool _hasFocus = false;
   bool _isValid = false; // validation state
 
   @override
@@ -44,9 +43,10 @@ class _LabeledTextInputState extends State<LabeledTextInput> {
     _controller.addListener(() {
       setState(() {}); // Refresh UI when text changes
     });
+
     _focusNode.addListener(() {
       setState(() {
-        _hasFocus = _focusNode.hasFocus;
+        // _hasFocus = _focusNode.hasFocus;
       }); // rebuild to reflect focus change
     });
   }
@@ -71,71 +71,86 @@ class _LabeledTextInputState extends State<LabeledTextInput> {
 
     return Opacity(
       opacity: widget.isEnabled ? _enabledAlpha : _disabledAlpha,
-      child: TextFormField(
-        controller: _controller,
-        focusNode: _focusNode,
-        obscureText: widget.obscureText,
-        keyboardType: widget.keyboardType,
-        enabled: widget.isEnabled,
-        validator: widget.validator,
-        onChanged: (value) {
-          if (widget.onChanged != null) widget.onChanged!(value);
-          //_validate();
-          //setState(() {}); // update border color dynamically
-        },
-        decoration: InputDecoration(
-          suffixIcon: _controller.text.isNotEmpty
-              ? IconButton(
-                  icon: SvgPicture.asset(AppIconType.clear.assetPath),
-                  iconSize: AppDimensions.spacingLarge,
-                  onPressed: () {
-                    _controller.clear();
-                    setState(() {}); // Hide the icon
-                  },
-                )
-              : null,
-          labelText: widget.label.toUpperCase(),
-          labelStyle: AppTextStyles.chip.copyWith(
-            color: AppColors.primaryBlack100,
-          ),
-          hintStyle: AppTextStyles.title.copyWith(
-            color: hasFocus
-                ? AppColors.primaryBlack100
-                : AppColors.primaryBlack20,
-          ),
-          hintText: widget.hint,
-          floatingLabelBehavior: FloatingLabelBehavior.always, // always float
-          border: UnderlineInputBorder(
-            borderSide: BorderSide(color: AppColors.primaryBlack20, width: 1),
-          ),
-          enabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: AppColors.primaryBlack20, width: 1),
-          ),
-          focusedBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: _isValid
-                  ? AppColors.primaryGreenSuccess100
-                  : AppColors.primaryBlue60,
-              width: 2,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            widget.label.toUpperCase(), // always visible label
+            style: AppTextStyles.chip.copyWith(
+              color: AppColors.primaryBlack100,
             ),
           ),
-          disabledBorder: UnderlineInputBorder(
-            borderSide: BorderSide(color: AppColors.primaryBlack20),
-          ),
-          errorBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: AppColors.primaryRedError100,
-              width: 2,
+          SizedBox(height: AppDimensions.spacingSmall),
+          TextFormField(
+            controller: _controller,
+            focusNode: _focusNode,
+            obscureText: widget.obscureText,
+            keyboardType: widget.keyboardType,
+            enabled: widget.isEnabled,
+            validator: widget.validator,
+            onChanged: (value) {
+              if (widget.onChanged != null) widget.onChanged!(value);
+              //_validate();
+              //setState(() {}); // update border color dynamically
+            },
+            decoration: InputDecoration(
+              suffixIcon: _controller.text.isNotEmpty
+                  ? IconButton(
+                      icon: SvgPicture.asset(AppIconType.clear.assetPath),
+                      iconSize: AppDimensions.spacingLarge,
+                      onPressed: () {
+                        _controller.clear();
+                        setState(() {}); // Hide the icon
+                      },
+                    )
+                  : null,
+              hintStyle: AppTextStyles.title.copyWith(
+                color: hasFocus
+                    ? AppColors.primaryBlack100
+                    : AppColors.primaryBlack20,
+              ),
+              hintText: widget.hint,
+              border: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: AppColors.primaryBlack20,
+                  width: 1,
+                ),
+              ),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: AppColors.primaryBlack20,
+                  width: 1,
+                ),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: _isValid
+                      ? AppColors.primaryGreenSuccess100
+                      : AppColors.primaryBlue60,
+                  width: 2,
+                ),
+              ),
+              disabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: AppColors.primaryBlack20),
+              ),
+              errorBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: AppColors.primaryRedError100,
+                  width: 2,
+                ),
+              ),
+              focusedErrorBorder: UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: AppColors.primaryRedError100,
+                  width: 2,
+                ),
+              ),
+              contentPadding: const EdgeInsets.symmetric(
+                vertical: AppDimensions.spacingSmall,
+              ),
             ),
           ),
-          focusedErrorBorder: UnderlineInputBorder(
-            borderSide: BorderSide(
-              color: AppColors.primaryRedError100,
-              width: 2,
-            ),
-          ),
-          contentPadding: const EdgeInsets.symmetric(vertical: 12),
-        ),
+        ],
       ),
     );
   }
