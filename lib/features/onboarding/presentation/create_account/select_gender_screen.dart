@@ -10,14 +10,14 @@ import 'package:habits_tracker_app/core/widgets/primary_button.dart';
 import 'package:habits_tracker_app/features/onboarding/widgets/option_box.dart';
 import 'package:habits_tracker_app/features/onboarding/widgets/single_choice_box.dart';
 
-class CreateAccountScreen extends StatefulWidget {
-  CreateAccountScreen({super.key});
+class SelectGenderScreen extends StatefulWidget {
+  SelectGenderScreen({super.key});
 
   @override
-  State<CreateAccountScreen> createState() => _CreateAccountScreenState();
+  State<SelectGenderScreen> createState() => _SelectGenderScreenState();
 }
 
-class _CreateAccountScreenState extends State<CreateAccountScreen> {
+class _SelectGenderScreenState extends State<SelectGenderScreen> {
   int _selectedGenderIndex = -1;
 
   void _onGenderSelected(int index) {
@@ -25,6 +25,8 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
       _selectedGenderIndex = index;
     });
   }
+
+  void _onNextTap() {}
 
   @override
   Widget build(BuildContext context) {
@@ -55,6 +57,7 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                 SizedBox(height: AppDimensions.spacingMedium),
                 Expanded(
                   child: SingleChoiceBox(
+                    selectedIndex: _selectedGenderIndex,
                     firstOption: SizedBox(
                       height: gridCellHeight,
                       child: OptionBox(emoji: "🤷🏻‍", title: "Male"),
@@ -63,11 +66,12 @@ class _CreateAccountScreenState extends State<CreateAccountScreen> {
                       height: gridCellHeight,
                       child: OptionBox(emoji: "🙋🏻‍♀️", title: "Female"),
                     ),
-                    onSelectionChanged: (value) => _onGenderSelected,
+                    onSelectionChanged: (value) => _onGenderSelected(value),
                   ),
                 ),
                 PrimaryButton(
                   text: "Next",
+                  onTap: _selectedGenderIndex != -1 ? _onNextTap : null,
                   fullWidth: true,
                   buttonSize: ButtonSize.large,
                 ),

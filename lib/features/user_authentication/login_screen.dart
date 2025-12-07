@@ -3,9 +3,11 @@ import 'package:habits_tracker_app/core/theme/app_colors.dart';
 import 'package:habits_tracker_app/core/theme/app_dimensions.dart';
 import 'package:habits_tracker_app/core/theme/app_icon_type.dart';
 import 'package:habits_tracker_app/core/theme/app_text_styles.dart';
+import 'package:habits_tracker_app/core/utils/validators.dart';
 import 'package:habits_tracker_app/core/widgets/body_wrapper.dart';
 import 'package:habits_tracker_app/core/widgets/header.dart';
-import 'package:habits_tracker_app/core/widgets/labeled_text_input.dart';
+import 'package:habits_tracker_app/core/widgets/labeled_password_input_field.dart';
+import 'package:habits_tracker_app/core/widgets/labeled_text_input_field.dart';
 import 'package:habits_tracker_app/core/widgets/models/button_size.dart';
 import 'package:habits_tracker_app/core/widgets/primary_button.dart';
 import 'package:habits_tracker_app/routes/app_routes.dart';
@@ -18,6 +20,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final emailValidators = [
+    Validators.required(fieldName: "Email"),
+    Validators.email(),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,22 +48,19 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Column(
                     spacing: AppDimensions.spacingMedium,
                     children: [
-                      LabeledTextInput(
-                        label: "E_Mail",
+                      LabeledTextInputField(
+                        label: "E-Mail",
                         hint: "Enter your email",
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return "Email is required";
-                          }
-                          if (!RegExp(r'\S+@\S+\.\S+').hasMatch(value)) {
-                            return "Invalid email";
-                          }
-                          return null;
-                        },
+                        keyboardType:
+                            TextInputType.emailAddress, // Email keyboard
+                        validator: (value) => validate(emailValidators, value),
                       ),
-                      LabeledTextInput(
+                      LabeledPasswordInputField(
                         label: "Password",
                         hint: "Enter your password",
+                        maxLength: 12,
+                        minLength: 4,
+                        validator: Validators.required(fieldName: "Password"),
                       ),
                       Align(
                         alignment: AlignmentGeometry.centerLeft,
@@ -88,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       foregroundColor: AppColors.primaryBlue100,
                     ),
                     onPressed: () {
-                      Navigator.pushNamed(context, AppRoutes.createAccount);
+                      Navigator.pushNamed(context, AppRoutes.createAccountFlow);
                     },
                     child: Text("Dont't have account? Let's create!"),
                   ),

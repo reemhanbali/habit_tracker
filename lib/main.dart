@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:habits_tracker_app/app.dart';
 import 'package:habits_tracker_app/core/widgets/widget_preview.dart';
-import 'package:habits_tracker_app/features/onboarding/presentation/create_account_screen.dart';
+import 'package:habits_tracker_app/features/onboarding/presentation/create_account/create_account_flow.dart';
+import 'package:habits_tracker_app/features/onboarding/presentation/create_account/select_gender_screen.dart';
 import 'package:habits_tracker_app/features/onboarding/repository/onboarding_repository.dart';
 import 'package:habits_tracker_app/features/onboarding/widgets/option_box.dart';
 
@@ -22,5 +23,5 @@ void main() async {
 
   // runApp(MyApp(hasSeenOnboarding: hasSeenOnboarding));
 
-  runApp(MaterialApp(home: CreateAccountScreen()));
+  runApp(MaterialApp(home: CreateAccountFlow()));
 }

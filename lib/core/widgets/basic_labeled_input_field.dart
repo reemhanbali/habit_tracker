@@ -5,17 +5,27 @@ import 'package:habits_tracker_app/core/theme/app_dimensions.dart';
 import 'package:habits_tracker_app/core/theme/app_icon_type.dart';
 import 'package:habits_tracker_app/core/theme/app_text_styles.dart';
 
-class LabeledTextInput extends StatefulWidget {
+class BasicLabeledInputField extends StatefulWidget {
   final String label;
   final String? hint;
   final bool obscureText;
   final TextInputType keyboardType;
+  final TextEditingController? controller;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
   final bool isEnabled;
+  final int? minLength;
+  final int? maxLength;
+  final bool readOnly;
+  final VoidCallback? onTap;
 
-  const LabeledTextInput({
+  const BasicLabeledInputField({
+    this.onTap,
     super.key,
+    required this.controller,
+    this.readOnly = false,
+    this.minLength,
+    this.maxLength,
     required this.label,
     this.hint,
     this.obscureText = false,
@@ -26,42 +36,54 @@ class LabeledTextInput extends StatefulWidget {
   });
 
   @override
-  State<LabeledTextInput> createState() => _LabeledTextInputState();
+  State<BasicLabeledInputField> createState() => _BasicLabeledInputFieldState();
 }
 
-class _LabeledTextInputState extends State<LabeledTextInput> {
-  late final TextEditingController _controller;
+class _BasicLabeledInputFieldState extends State<BasicLabeledInputField> {
+  TextEditingController? _controller;
   late final FocusNode _focusNode;
   bool _isValid = false; // validation state
+  String? _errorText;
 
   @override
   void initState() {
     super.initState();
+
+    _controller = widget.controller;
+    _controller?.addListener(_validate);
+
     _focusNode = FocusNode();
-
-    _controller = TextEditingController();
-    _controller.addListener(() {
-      setState(() {}); // Refresh UI when text changes
-    });
-
-    _focusNode.addListener(() {
-      setState(() {
-        // _hasFocus = _focusNode.hasFocus;
-      }); // rebuild to reflect focus change
-    });
   }
 
   void _validate() {
-    if (widget.validator != null) {
-      final result = widget.validator!(_controller.text);
-      setState(() {});
+    final text = _controller?.text ?? "";
+    final error = widget.validator?.call(text);
+    setState(() {
+      _errorText = error;
+    });
+
+    /* 
+    if (widget.minLength != null && text.length < widget.minLength!) {
+      String? error = 'Minimum ${widget.minLength} characters required';
+      setState(() {
+        _errorText = error;
+      });
+    } else {
+      setState(() {
+        _errorText = null;
+      });
     }
+
+    if (widget.validator != null) {
+      final result = widget.validator!(_controller?.text);
+    } */
   }
 
   @override
   void dispose() {
     _focusNode.dispose();
-    _controller.dispose();
+    _controller?.removeListener(_validate);
+    _controller?.dispose();
     super.dispose();
   }
 
@@ -86,20 +108,24 @@ class _LabeledTextInputState extends State<LabeledTextInput> {
             focusNode: _focusNode,
             obscureText: widget.obscureText,
             keyboardType: widget.keyboardType,
+            readOnly: widget.readOnly,
             enabled: widget.isEnabled,
             validator: widget.validator,
+            maxLength: widget.maxLength,
+            onTap: widget.onTap,
             onChanged: (value) {
               if (widget.onChanged != null) widget.onChanged!(value);
               //_validate();
               //setState(() {}); // update border color dynamically
             },
             decoration: InputDecoration(
-              suffixIcon: _controller.text.isNotEmpty
+              errorText: _errorText,
+              suffixIcon: _controller?.text.isNotEmpty == true
                   ? IconButton(
                       icon: SvgPicture.asset(AppIconType.clear.assetPath),
                       iconSize: AppDimensions.spacingLarge,
                       onPressed: () {
-                        _controller.clear();
+                        _controller?.clear();
                         setState(() {}); // Hide the icon
                       },
                     )

@@ -2,50 +2,37 @@ import 'package:flutter/material.dart';
 import 'package:habits_tracker_app/core/theme/app_colors.dart';
 import 'package:habits_tracker_app/core/theme/app_dimensions.dart';
 
-class SingleChoiceBox extends StatefulWidget {
+class SingleChoiceBox extends StatelessWidget {
   final Widget firstOption;
   final Widget secondOption;
   final ValueChanged<int>? onSelectionChanged;
-  final int initialSelectedIndex;
+  final int selectedIndex;
 
   const SingleChoiceBox({
     super.key,
     required this.firstOption,
     required this.secondOption,
     this.onSelectionChanged,
-    this.initialSelectedIndex = -1,
+    this.selectedIndex = -1,
   });
 
-  @override
-  State<SingleChoiceBox> createState() => _SingleChoiceBoxState();
-}
-
-class _SingleChoiceBoxState extends State<SingleChoiceBox> {
-  late int selectedIndex;
-
-  @override
-  void initState() {
-    super.initState();
-    selectedIndex = widget.initialSelectedIndex;
-  }
-
   void _onTap(int index) {
-    setState(() => selectedIndex = index);
-    widget.onSelectionChanged?.call(index); // notify parent
+    onSelectionChanged?.call(index); // notify parent
   }
 
   @override
   Widget build(BuildContext context) {
     return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
           child: GestureDetector(
             onTap: () {
-              _onTap(0);
+              _onTap(_firstChildIndex);
             },
             child: SelectableOption(
-              isSelected: selectedIndex == 0,
-              child: widget.firstOption,
+              isSelected: selectedIndex == _firstChildIndex,
+              child: firstOption,
             ),
           ),
         ),
@@ -55,11 +42,11 @@ class _SingleChoiceBoxState extends State<SingleChoiceBox> {
         Expanded(
           child: GestureDetector(
             onTap: () {
-              _onTap(1);
+              _onTap(_secondChildIndex);
             },
             child: SelectableOption(
-              isSelected: selectedIndex == 1,
-              child: widget.secondOption,
+              isSelected: selectedIndex == _secondChildIndex,
+              child: secondOption,
             ),
           ),
         ),
@@ -94,3 +81,5 @@ class SelectableOption extends StatelessWidget {
 }
 
 const double gridCellHeight = 134;
+const int _firstChildIndex = 0;
+const int _secondChildIndex = 1;
