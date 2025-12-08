@@ -6,7 +6,7 @@ import 'package:habits_tracker_app/features/onboarding/presentation/create_accou
 
 class CreateAccountFlow extends StatelessWidget {
   final GoRouter _router = GoRouter(
-    initialLocation: createAccountStep1,
+    initialLocation: createAccountStep3,
     routes: [
       GoRoute(
         path: createAccountStep1,

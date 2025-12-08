@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:habits_tracker_app/core/theme/app_colors.dart';
 import 'package:habits_tracker_app/core/theme/app_dimensions.dart';
 import 'package:habits_tracker_app/core/theme/app_icon_type.dart';
@@ -7,6 +8,7 @@ import 'package:habits_tracker_app/core/widgets/body_wrapper.dart';
 import 'package:habits_tracker_app/core/widgets/header.dart';
 import 'package:habits_tracker_app/core/widgets/models/button_size.dart';
 import 'package:habits_tracker_app/core/widgets/primary_button.dart';
+import 'package:habits_tracker_app/features/onboarding/presentation/create_account/create_account_flow.dart';
 import 'package:habits_tracker_app/features/onboarding/widgets/option_box.dart';
 import 'package:habits_tracker_app/features/onboarding/widgets/single_choice_box.dart';
 
@@ -26,7 +28,9 @@ class _SelectGenderScreenState extends State<SelectGenderScreen> {
     });
   }
 
-  void _onNextTap() {}
+  void _onNextTap() {
+    context.push(createAccountStep3);
+  }
 
   @override
   Widget build(BuildContext context) {

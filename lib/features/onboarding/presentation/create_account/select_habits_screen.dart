@@ -7,6 +7,7 @@ import 'package:habits_tracker_app/core/widgets/body_wrapper.dart';
 import 'package:habits_tracker_app/core/widgets/header.dart';
 import 'package:habits_tracker_app/core/widgets/models/button_size.dart';
 import 'package:habits_tracker_app/core/widgets/primary_button.dart';
+import 'package:habits_tracker_app/features/onboarding/presentation/models/habit_ui_model.dart';
 import 'package:habits_tracker_app/features/onboarding/widgets/option_box.dart';
 import 'package:habits_tracker_app/features/onboarding/widgets/single_choice_box.dart';
 
@@ -18,11 +19,31 @@ class SelectHabitsScreen extends StatefulWidget {
 }
 
 class _SelectHabitsScreenState extends State<SelectHabitsScreen> {
-  int _selectedGenderIndex = -1;
+  final List<HabitUiModel> habits = [
+    HabitUiModel(emoji: "💧", name: "Drink water"),
+    HabitUiModel(emoji: "🏃🏻‍♀️", name: "Run"),
+    HabitUiModel(emoji: "📖", name: "Read books"),
+    HabitUiModel(emoji: "🧘🏻‍♀️", name: "Meditate"),
+    HabitUiModel(emoji: "🧑🏻‍💻‍", name: "Study"),
+    HabitUiModel(emoji: "📕", name: "Journal"),
+    HabitUiModel(emoji: "🌿‍", name: "Water plant"),
+    HabitUiModel(emoji: "😴", name: "Sleep"),
+    HabitUiModel(emoji: "🧑🏻‍💻‍", name: "Study"),
+    HabitUiModel(emoji: "📕", name: "Journal"),
+    HabitUiModel(emoji: "🌿‍", name: "Water plant"),
+    HabitUiModel(emoji: "😴", name: "Sleep"),
+  ];
 
-  void _onGenderSelected(int index) {
+  // Holds selected indexes
+  final Set<int> selectedIndexes = {};
+
+  void toggleSelection(int index) {
     setState(() {
-      _selectedGenderIndex = index;
+      if (selectedIndexes.contains(index)) {
+        selectedIndexes.remove(index);
+      } else {
+        selectedIndexes.add(index);
+      }
     });
   }
 
@@ -48,30 +69,55 @@ class _SelectHabitsScreenState extends State<SelectHabitsScreen> {
                 Align(
                   alignment: AlignmentGeometry.centerLeft,
                   child: Text(
-                    "Choose your gender",
+                    "Choose your first habits",
                     style: AppTextStyles.title.copyWith(
                       color: AppColors.primaryBlack100,
                     ),
                   ),
                 ),
-                SizedBox(height: AppDimensions.spacingMedium),
+                SizedBox(height: AppDimensions.spacingXSmall),
+                Align(
+                  alignment: AlignmentGeometry.centerLeft,
+                  child: Text(
+                    "You may add more habits later",
+                    style: AppTextStyles.paragraphBook.copyWith(
+                      color: AppColors.primaryBlack60,
+                    ),
+                  ),
+                ),
                 Expanded(
-                  child: SingleChoiceBox(
-                    selectedIndex: _selectedGenderIndex,
-                    firstOption: SizedBox(
-                      height: gridCellHeight,
-                      child: OptionBox(emoji: "🤷🏻‍", title: "Male"),
+                  child: GridView.builder(
+                    padding: EdgeInsets.symmetric(
+                      vertical: AppDimensions.spacingMedium,
                     ),
-                    secondOption: SizedBox(
-                      height: gridCellHeight,
-                      child: OptionBox(emoji: "🙋🏻‍♀️", title: "Female"),
-                    ),
-                    onSelectionChanged: (value) => _onGenderSelected(value),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2, // number of columns
+                          crossAxisSpacing: AppDimensions.spacingLarge,
+                          mainAxisSpacing: AppDimensions.spacingMedium,
+                          childAspectRatio: 1.2,
+                        ),
+                    itemCount: habits.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () => toggleSelection(index),
+                        child: SelectableOption(
+                          isSelected: selectedIndexes.contains(index),
+                          child: SizedBox(
+                            height: gridCellHeight,
+                            child: OptionBox(
+                              emoji: habits[index].emoji,
+                              title: habits[index].name,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
                 PrimaryButton(
                   text: "Next",
-                  onTap: _selectedGenderIndex != -1 ? _onNextTap : null,
+                  onTap: selectedIndexes.isNotEmpty ? _onNextTap : null,
                   fullWidth: true,
                   buttonSize: ButtonSize.large,
                 ),
