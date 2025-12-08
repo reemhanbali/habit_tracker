@@ -50,8 +50,6 @@ class _BasicLabeledInputFieldState extends State<BasicLabeledInputField> {
     super.initState();
 
     _controller = widget.controller;
-    _controller?.addListener(_validate);
-
     _focusNode = FocusNode();
   }
 
@@ -115,8 +113,6 @@ class _BasicLabeledInputFieldState extends State<BasicLabeledInputField> {
             onTap: widget.onTap,
             onChanged: (value) {
               if (widget.onChanged != null) widget.onChanged!(value);
-              //_validate();
-              //setState(() {}); // update border color dynamically
             },
             decoration: InputDecoration(
               errorText: _errorText,
@@ -126,6 +122,7 @@ class _BasicLabeledInputFieldState extends State<BasicLabeledInputField> {
                       iconSize: AppDimensions.spacingLarge,
                       onPressed: () {
                         _controller?.clear();
+                        if (widget.onChanged != null) widget.onChanged!("");
                         setState(() {}); // Hide the icon
                       },
                     )

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:habits_tracker_app/core/theme/app_dimensions.dart';
 import 'package:habits_tracker_app/core/theme/app_icon_type.dart';
 import 'package:habits_tracker_app/core/utils/validators.dart';
@@ -8,28 +9,61 @@ import 'package:habits_tracker_app/core/widgets/labeled_date_input_field.dart';
 import 'package:habits_tracker_app/core/widgets/labeled_text_input_field.dart';
 import 'package:habits_tracker_app/core/widgets/models/button_size.dart';
 import 'package:habits_tracker_app/core/widgets/primary_button.dart';
+import 'package:habits_tracker_app/features/onboarding/presentation/create_account/create_account_flow.dart';
 
-class EnterInformationScreen extends StatelessWidget {
+class EnterInformationScreen extends StatefulWidget {
   EnterInformationScreen({super.key});
-  final _formKey = GlobalKey<FormState>();
+  @override
+  State<EnterInformationScreen> createState() => _EnterInformationScreenState();
 
-  final _birthdateController =
-      TextEditingController(); // Controller for TextFormField
-  final _firstNameController =
-      TextEditingController(); // Controller for TextFormField
-  final _surnameController =
-      TextEditingController(); // Controller for TextFormField
+  static const _nameMinLength = 3;
+  static const _nameMaxLength = 15;
+}
+
+class _EnterInformationScreenState extends State<EnterInformationScreen> {
+  final _formKey = GlobalKey<FormState>();
+  bool _isValid = false;
+
+  final _birthdateController = TextEditingController();
+  // Controller for TextFormField
+  final _firstNameController = TextEditingController();
+  // Controller for TextFormField
+  final _lastNameController = TextEditingController();
+  // Controller for TextFormField
 
   final firstNameValidators = [
-    Validators.required(fieldName: "First Name"),
-    Validators.minLength(min: _nameMinLength),
-    Validators.maxLength(max: _nameMaxLength),
+    Validators.required(fieldName: "First name"),
+    Validators.minLength(min: EnterInformationScreen._nameMinLength),
+    Validators.maxLength(max: EnterInformationScreen._nameMaxLength),
   ];
 
   final lastNameValidators = [
-    Validators.required(fieldName: "Surname"),
-    Validators.email(),
+    Validators.required(fieldName: "Last name"),
+    Validators.minLength(min: EnterInformationScreen._nameMinLength),
+    Validators.maxLength(max: EnterInformationScreen._nameMaxLength),
   ];
+
+  final birthdateValidators = [Validators.required(fieldName: "Birth date")];
+
+  // Controller for TextFormField
+  void _checkFormValid() {
+    final firstNameOk =
+        validate(firstNameValidators, _firstNameController.text) == null;
+    final lastNameOk =
+        validate(lastNameValidators, _lastNameController.text) == null;
+    final birthdateOk =
+        validate(birthdateValidators, _birthdateController.text) == null;
+
+    setState(() {
+      _isValid = firstNameOk && lastNameOk && birthdateOk;
+    });
+  }
+
+  void _onNext() {
+    if (_formKey.currentState!.validate()) {
+      context.push(createAccountStep2);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,31 +93,32 @@ class EnterInformationScreen extends StatelessWidget {
                         LabeledTextInputField(
                           label: "Name",
                           hint: "Enter your first name",
-                          minLength: _nameMinLength,
-                          maxLength: _nameMaxLength,
+                          minLength: EnterInformationScreen._nameMinLength,
+                          maxLength: EnterInformationScreen._nameMaxLength,
                           controller: _firstNameController,
                           keyboardType: TextInputType.name,
-                          validator: Validators.required(
-                            fieldName: "First name",
-                          ),
+                          validator: (value) =>
+                              validate(firstNameValidators, value),
+                          onChanged: (value) => _checkFormValid(),
                         ),
                         LabeledTextInputField(
                           label: "Surname",
                           hint: "Enter your surname",
                           keyboardType: TextInputType.name,
-                          minLength: _nameMinLength,
-                          controller: _surnameController,
-                          maxLength: _nameMaxLength,
-                          validator: Validators.required(fieldName: "Surname"),
+                          minLength: EnterInformationScreen._nameMinLength,
+                          controller: _lastNameController,
+                          maxLength: EnterInformationScreen._nameMaxLength,
+                          validator: (value) =>
+                              validate(lastNameValidators, value),
+                          onChanged: (value) => _checkFormValid(),
                         ),
                         LabeledDateInputField(
                           label: "Birthdate",
                           hint: "MM/dd/yyyy",
                           controller: _birthdateController,
-                          validator: Validators.required(
-                            fieldName: "Birth date",
-                          ),
-                          onDateSelected: (value) => {},
+                          validator: (value) =>
+                              validate(birthdateValidators, value),
+                          onDateSelected: (value) => _checkFormValid(),
                         ),
                       ],
                     ),
@@ -93,15 +128,7 @@ class EnterInformationScreen extends StatelessWidget {
               PrimaryButton(
                 text: "Next",
                 fullWidth: true,
-                onTap: () {
-                  if (_formKey.currentState!.validate()) {
-                    // All fields are valid
-                    print(
-                      "Name :${_firstNameController.text} ${_surnameController.text}",
-                    );
-                    print("DOB: ${_birthdateController.text}");
-                  }
-                },
+                onTap: _isValid ? _onNext : null,
                 buttonSize: ButtonSize.large,
               ),
             ],
@@ -110,7 +137,4 @@ class EnterInformationScreen extends StatelessWidget {
       ),
     );
   }
-
-  static const _nameMinLength = 8;
-  static const _nameMaxLength = 15;
 }

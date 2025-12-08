@@ -20,10 +20,36 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool _isValid = false;
+
   final emailValidators = [
     Validators.required(fieldName: "Email"),
     Validators.email(),
   ];
+
+  final passwordValidators = [Validators.required(fieldName: "Password")];
+
+  final _emailController =
+      TextEditingController(); // Controller for TextFormField
+  final _passwordController =
+      TextEditingController(); // Controller for TextFormField
+
+  void _checkFormValid() {
+    final emailOk = validate(emailValidators, _emailController.text) == null;
+    final passwordOk =
+        validate(passwordValidators, _passwordController.text) == null;
+
+    setState(() {
+      _isValid = emailOk && passwordOk;
+    });
+  }
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +80,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         keyboardType:
                             TextInputType.emailAddress, // Email keyboard
                         validator: (value) => validate(emailValidators, value),
+                        controller: _emailController,
+                        onChanged: (value) {
+                          _checkFormValid();
+                        },
                       ),
                       LabeledPasswordInputField(
                         label: "Password",
@@ -61,6 +91,10 @@ class _LoginScreenState extends State<LoginScreen> {
                         maxLength: 12,
                         minLength: 4,
                         validator: Validators.required(fieldName: "Password"),
+                        controller: _passwordController,
+                        onChanged: (value) {
+                          _checkFormValid();
+                        },
                       ),
                       Align(
                         alignment: AlignmentGeometry.centerLeft,
@@ -91,9 +125,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       textStyle: AppTextStyles.paragraphMedium,
                       foregroundColor: AppColors.primaryBlue100,
                     ),
-                    onPressed: () {
-                      Navigator.pushNamed(context, AppRoutes.createAccountFlow);
-                    },
+                    onPressed: _isValid
+                        ? () {
+                            Navigator.pushNamed(
+                              context,
+                              AppRoutes.createAccountFlow,
+                            );
+                          }
+                        : null,
                     child: Text("Dont't have account? Let's create!"),
                   ),
                   SizedBox(height: AppDimensions.spacingXSmall),

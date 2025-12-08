@@ -8,6 +8,7 @@ class LabeledPasswordInputField extends StatefulWidget {
   final String? Function(String?)? validator;
   final int? minLength;
   final int? maxLength;
+  final void Function(String)? onChanged;
 
   LabeledPasswordInputField({
     super.key,
@@ -17,6 +18,7 @@ class LabeledPasswordInputField extends StatefulWidget {
     this.validator,
     this.minLength,
     this.maxLength,
+    this.onChanged,
   });
 
   @override
@@ -43,6 +45,7 @@ class _LabeledPasswordInputFieldState extends State<LabeledPasswordInputField> {
       maxLength: widget.maxLength,
       minLength: widget.minLength,
       obscureText: true,
+      onChanged: widget.onChanged,
     );
   }
 }

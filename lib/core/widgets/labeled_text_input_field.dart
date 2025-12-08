@@ -11,6 +11,7 @@ class LabeledTextInputField extends StatefulWidget {
   final int? maxLength;
   final bool readOnly;
   final TextInputType keyboardType;
+  final void Function(String)? onChanged;
 
   LabeledTextInputField({
     super.key,
@@ -23,6 +24,7 @@ class LabeledTextInputField extends StatefulWidget {
     this.maxLength,
     this.readOnly = false,
     this.keyboardType = TextInputType.text,
+    this.onChanged,
   });
 
   @override
@@ -49,6 +51,7 @@ class _LabeledTextInputFieldState extends State<LabeledTextInputField> {
       minLength: widget.minLength,
       isEnabled: widget.isEnabled,
       readOnly: widget.readOnly,
+      onChanged: widget.onChanged,
     );
   }
 }
