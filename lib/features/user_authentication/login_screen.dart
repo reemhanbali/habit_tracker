@@ -61,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       appBar: Header(
         title: "Continue with E-mail",
-        leftIcon: AppIconType.arrowLeft.assetPath,
+        leftIcon: AppIconType.arrowLeft,
       ),
       body: BodyWrapper(
         child: Padding(

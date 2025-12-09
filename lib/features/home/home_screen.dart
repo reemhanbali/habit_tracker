@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:habits_tracker_app/core/theme/app_icon_type.dart';
+import 'package:habits_tracker_app/core/widgets/header.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -7,7 +8,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: Header(
+        leftIcon: AppIconType.calendar,
+        rightIcon: AppIconType.notification,
+      ),
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,

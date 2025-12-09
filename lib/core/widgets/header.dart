@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:habits_tracker_app/core/theme/app_colors.dart';
 import 'package:habits_tracker_app/core/theme/app_dimensions.dart';
+import 'package:habits_tracker_app/core/theme/app_icon_type.dart';
 import 'package:habits_tracker_app/core/theme/app_text_styles.dart';
 import 'package:habits_tracker_app/core/widgets/icon_button.dart';
 import 'package:habits_tracker_app/core/widgets/models/icon_button_size.dart';
 
 class Header extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
-  final String? leftIcon;
-  final String? rightIcon;
+  final AppIconType? leftIcon;
+  final AppIconType? rightIcon;
   final VoidCallback? onLeftIconTap;
   final VoidCallback? onRightIconTap;
 

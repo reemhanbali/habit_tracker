@@ -56,10 +56,7 @@ class _SelectHabitsScreenState extends State<SelectHabitsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Header(
-        title: "Create Account",
-        leftIcon: AppIconType.arrowLeft.assetPath,
-      ),
+      appBar: Header(title: "Create Account", leftIcon: AppIconType.arrowLeft),
       body: BodyWrapper(
         child: Padding(
           padding: const EdgeInsets.symmetric(

@@ -1,9 +1,9 @@
 import 'package:go_router/go_router.dart';
-import 'package:habits_tracker_app/features/dashboard/screens/activity_screen.dart';
-import 'package:habits_tracker_app/features/dashboard/screens/explore_screen.dart';
-import 'package:habits_tracker_app/features/dashboard/screens/home_screen.dart';
-import 'package:habits_tracker_app/features/dashboard/screens/main_shell.dart';
-import 'package:habits_tracker_app/features/dashboard/screens/profile_screen.dart';
+import 'package:habits_tracker_app/features/bottom_nav/screens/activity_screen.dart';
+import 'package:habits_tracker_app/features/bottom_nav/screens/explore_screen.dart';
+import 'package:habits_tracker_app/features/home/home_screen.dart';
+import 'package:habits_tracker_app/features/bottom_nav/screens/main_shell.dart';
+import 'package:habits_tracker_app/features/bottom_nav/screens/profile_screen.dart';
 import 'package:habits_tracker_app/features/onboarding/screens/create_account/create_account_shell.dart';
 import 'package:habits_tracker_app/features/onboarding/screens/create_account/enter_information_screen.dart';
 import 'package:habits_tracker_app/features/onboarding/screens/create_account/select_gender_screen.dart';

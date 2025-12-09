@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:habits_tracker_app/core/theme/app_colors.dart';
 import 'package:habits_tracker_app/core/theme/app_dimensions.dart';
+import 'package:habits_tracker_app/core/theme/app_icon_type.dart';
 import 'package:habits_tracker_app/core/widgets/models/icon_button_size.dart';
 import 'package:habits_tracker_app/core/widgets/models/icon_button_type.dart';
 
@@ -9,7 +10,7 @@ class CustomIconButton extends StatefulWidget {
   final IconButtonSize iconButtonSize;
   final IconButtonType iconButtonType;
   final VoidCallback? onTap;
-  final String icon;
+  final AppIconType icon;
   double _dimension = 0;
 
   CustomIconButton({
@@ -68,7 +69,7 @@ class _CustomIconButtonState extends State<CustomIconButton> {
             borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
           ),
           child: SvgPicture.asset(
-            widget.icon,
+            widget.icon.assetPath,
             width: _iconSize,
             height: _iconSize,
           ),

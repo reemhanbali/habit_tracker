@@ -8,7 +8,6 @@ import 'package:habits_tracker_app/core/widgets/body_wrapper.dart';
 import 'package:habits_tracker_app/core/widgets/header.dart';
 import 'package:habits_tracker_app/core/widgets/models/button_size.dart';
 import 'package:habits_tracker_app/core/widgets/primary_button.dart';
-import 'package:habits_tracker_app/features/onboarding/screens/create_account/create_account_shell.dart';
 import 'package:habits_tracker_app/features/onboarding/widgets/option_box.dart';
 import 'package:habits_tracker_app/features/onboarding/widgets/single_choice_box.dart';
 import 'package:habits_tracker_app/routes/app_routes.dart';
@@ -36,10 +35,7 @@ class _SelectGenderScreenState extends State<SelectGenderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Header(
-        title: "Create Account",
-        leftIcon: AppIconType.arrowLeft.assetPath,
-      ),
+      appBar: Header(title: "Create Account", leftIcon: AppIconType.arrowLeft),
       body: BodyWrapper(
         child: Padding(
           padding: const EdgeInsets.symmetric(
