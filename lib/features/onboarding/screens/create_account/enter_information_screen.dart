@@ -9,7 +9,8 @@ import 'package:habits_tracker_app/core/widgets/labeled_date_input_field.dart';
 import 'package:habits_tracker_app/core/widgets/labeled_text_input_field.dart';
 import 'package:habits_tracker_app/core/widgets/models/button_size.dart';
 import 'package:habits_tracker_app/core/widgets/primary_button.dart';
-import 'package:habits_tracker_app/features/onboarding/presentation/create_account/create_account_flow.dart';
+import 'package:habits_tracker_app/features/onboarding/screens/create_account/create_account_shell.dart';
+import 'package:habits_tracker_app/routes/app_routes.dart';
 
 class EnterInformationScreen extends StatefulWidget {
   EnterInformationScreen({super.key});
@@ -61,7 +62,7 @@ class _EnterInformationScreenState extends State<EnterInformationScreen> {
 
   void _onNext() {
     if (_formKey.currentState!.validate()) {
-      context.push(createAccountStep2);
+      context.go(AppRoutes.createAccountStep2);
     }
   }
 

@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:habits_tracker_app/routes/app_routes.dart';
+import 'package:go_router/go_router.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key, required this.hasSeenOnboarding});
+  MyApp({super.key, required this.router});
 
-  final bool hasSeenOnboarding;
+  final GoRouter router;
 
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     final padding = MediaQuery.of(context).padding;
 
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Habit Tracker',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      initialRoute: hasSeenOnboarding ? AppRoutes.auth : AppRoutes.onboarding,
-      onGenerateRoute: AppRoutes.generateRoute,
+      routerConfig: router, // GoRouter instance
     );
   }
 }

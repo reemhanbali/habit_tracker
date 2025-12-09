@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:habits_tracker_app/core/theme/app_colors.dart';
 import 'package:habits_tracker_app/core/theme/app_dimensions.dart';
 import 'package:habits_tracker_app/core/theme/app_text_styles.dart';
-import 'package:habits_tracker_app/features/onboarding/presentation/models/onboarding_page_ui_model.dart';
+import 'package:habits_tracker_app/features/onboarding/screens/models/onboarding_page_ui_model.dart';
 
 class OnboardingPage extends StatelessWidget {
   final OnboardingPageUiModel page;

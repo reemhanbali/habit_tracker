@@ -81,7 +81,6 @@ class _BasicLabeledInputFieldState extends State<BasicLabeledInputField> {
   void dispose() {
     _focusNode.dispose();
     _controller?.removeListener(_validate);
-    _controller?.dispose();
     super.dispose();
   }
 

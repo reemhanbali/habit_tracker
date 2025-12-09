@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:habits_tracker_app/core/theme/app_colors.dart';
 import 'package:habits_tracker_app/core/theme/app_dimensions.dart';
 import 'package:habits_tracker_app/core/theme/app_icon_type.dart';
@@ -42,6 +43,10 @@ class _LoginScreenState extends State<LoginScreen> {
     setState(() {
       _isValid = emailOk && passwordOk;
     });
+  }
+
+  void _onCreateAccountClick() {
+    context.push(AppRoutes.createAccountStep1);
   }
 
   @override
@@ -125,14 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       textStyle: AppTextStyles.paragraphMedium,
                       foregroundColor: AppColors.primaryBlue100,
                     ),
-                    onPressed: _isValid
-                        ? () {
-                            Navigator.pushNamed(
-                              context,
-                              AppRoutes.createAccountFlow,
-                            );
-                          }
-                        : null,
+                    onPressed: _onCreateAccountClick,
                     child: Text("Dont't have account? Let's create!"),
                   ),
                   SizedBox(height: AppDimensions.spacingXSmall),
@@ -140,6 +138,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     text: "Next",
                     fullWidth: true,
                     buttonSize: ButtonSize.large,
+                    onTap: _isValid
+                        ? () {
+                            context.push(AppRoutes.auth);
+                          }
+                        : null,
                   ),
                 ],
               ),

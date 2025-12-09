@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 import 'package:habits_tracker_app/core/theme/app_colors.dart';
 import 'package:habits_tracker_app/core/theme/app_dimensions.dart';
 import 'package:habits_tracker_app/core/theme/app_gradients.dart';
@@ -7,8 +8,8 @@ import 'package:habits_tracker_app/core/theme/app_icon_type.dart';
 import 'package:habits_tracker_app/core/theme/app_text_styles.dart';
 import 'package:habits_tracker_app/core/widgets/models/button_size.dart';
 import 'package:habits_tracker_app/core/widgets/secondary_button.dart';
-import 'package:habits_tracker_app/features/onboarding/presentation/models/onboarding_page_ui_model.dart';
-import 'package:habits_tracker_app/features/onboarding/presentation/onboarding_page.dart';
+import 'package:habits_tracker_app/features/onboarding/screens/models/onboarding_page_ui_model.dart';
+import 'package:habits_tracker_app/features/onboarding/screens/onboarding_page.dart';
 import 'package:habits_tracker_app/features/onboarding/repository/onboarding_repository.dart';
 import 'package:habits_tracker_app/features/onboarding/widgets/onboarding_page_view.dart';
 import 'package:habits_tracker_app/routes/app_routes.dart';
@@ -106,7 +107,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         buttonSize: ButtonSize.large,
                         fullWidth: true,
                         onTap: () {
-                          Navigator.pushNamed(context, AppRoutes.auth);
+                          context.push(AppRoutes.auth);
                         },
                       ),
                       Padding(

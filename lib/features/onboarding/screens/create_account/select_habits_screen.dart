@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:habits_tracker_app/core/theme/app_colors.dart';
 import 'package:habits_tracker_app/core/theme/app_dimensions.dart';
 import 'package:habits_tracker_app/core/theme/app_icon_type.dart';
@@ -7,9 +8,10 @@ import 'package:habits_tracker_app/core/widgets/body_wrapper.dart';
 import 'package:habits_tracker_app/core/widgets/header.dart';
 import 'package:habits_tracker_app/core/widgets/models/button_size.dart';
 import 'package:habits_tracker_app/core/widgets/primary_button.dart';
-import 'package:habits_tracker_app/features/onboarding/presentation/models/habit_ui_model.dart';
+import 'package:habits_tracker_app/features/onboarding/screens/models/habit_ui_model.dart';
 import 'package:habits_tracker_app/features/onboarding/widgets/option_box.dart';
 import 'package:habits_tracker_app/features/onboarding/widgets/single_choice_box.dart';
+import 'package:habits_tracker_app/routes/app_routes.dart';
 
 class SelectHabitsScreen extends StatefulWidget {
   SelectHabitsScreen({super.key});
@@ -47,7 +49,9 @@ class _SelectHabitsScreenState extends State<SelectHabitsScreen> {
     });
   }
 
-  void _onNextTap() {}
+  void _onNextTap() {
+    context.go(AppRoutes.home);
+  }
 
   @override
   Widget build(BuildContext context) {

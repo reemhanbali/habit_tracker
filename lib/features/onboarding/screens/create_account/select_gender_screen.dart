@@ -8,9 +8,10 @@ import 'package:habits_tracker_app/core/widgets/body_wrapper.dart';
 import 'package:habits_tracker_app/core/widgets/header.dart';
 import 'package:habits_tracker_app/core/widgets/models/button_size.dart';
 import 'package:habits_tracker_app/core/widgets/primary_button.dart';
-import 'package:habits_tracker_app/features/onboarding/presentation/create_account/create_account_flow.dart';
+import 'package:habits_tracker_app/features/onboarding/screens/create_account/create_account_shell.dart';
 import 'package:habits_tracker_app/features/onboarding/widgets/option_box.dart';
 import 'package:habits_tracker_app/features/onboarding/widgets/single_choice_box.dart';
+import 'package:habits_tracker_app/routes/app_routes.dart';
 
 class SelectGenderScreen extends StatefulWidget {
   SelectGenderScreen({super.key});
@@ -29,7 +30,7 @@ class _SelectGenderScreenState extends State<SelectGenderScreen> {
   }
 
   void _onNextTap() {
-    context.push(createAccountStep3);
+    context.go(AppRoutes.createAccountStep3);
   }
 
   @override
