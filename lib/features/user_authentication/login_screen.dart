@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:habits_tracker_app/core/theme/app_colors.dart';
 import 'package:habits_tracker_app/core/theme/app_dimensions.dart';
 import 'package:habits_tracker_app/core/theme/app_icon_type.dart';
 import 'package:habits_tracker_app/core/theme/app_text_styles.dart';
 import 'package:habits_tracker_app/core/utils/validators.dart';
+import 'package:habits_tracker_app/core/widgets/asset_icon.dart';
 import 'package:habits_tracker_app/core/widgets/body_wrapper.dart';
 import 'package:habits_tracker_app/core/widgets/header.dart';
+import 'package:habits_tracker_app/core/widgets/icon_button.dart';
 import 'package:habits_tracker_app/core/widgets/labeled_password_input_field.dart';
 import 'package:habits_tracker_app/core/widgets/labeled_text_input_field.dart';
 import 'package:habits_tracker_app/core/widgets/models/button_size.dart';
@@ -61,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       appBar: Header(
         title: "Continue with E-mail",
-        leftIcon: AppIconType.arrowLeft,
+        leftIcon: AssetIcon(AppIconType.arrowLeft.assetPath),
       ),
       body: BodyWrapper(
         child: Padding(

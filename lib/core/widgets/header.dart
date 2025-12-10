@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:habits_tracker_app/core/theme/app_colors.dart';
 import 'package:habits_tracker_app/core/theme/app_dimensions.dart';
-import 'package:habits_tracker_app/core/theme/app_icon_type.dart';
 import 'package:habits_tracker_app/core/theme/app_text_styles.dart';
 import 'package:habits_tracker_app/core/widgets/icon_button.dart';
 import 'package:habits_tracker_app/core/widgets/models/icon_button_size.dart';
 
 class Header extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
-  final AppIconType? leftIcon;
-  final AppIconType? rightIcon;
+  final Widget? leftIcon;
+  final Widget? rightIcon;
   final VoidCallback? onLeftIconTap;
   final VoidCallback? onRightIconTap;
 
@@ -44,7 +42,9 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
         backgroundColor: AppColors.primaryBaseWhite,
         automaticallyImplyLeading: false,
         title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: rightIcon != null
+              ? MainAxisAlignment.spaceBetween
+              : MainAxisAlignment.start,
           spacing: AppDimensions.spacingSmall,
           children: [
             if (leftIcon != null)

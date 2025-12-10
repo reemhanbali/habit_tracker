@@ -4,6 +4,7 @@ class AppDimensions {
   static const double spacingSmall = 8.0;
   static const double spacingMedium = 16.0;
   static const double spacingLarge = 24.0;
+  static const double spacing12 = 12.0;
 
   // Font sizes
   static const double size48 = 48.0;

@@ -26,6 +26,7 @@ class MainShell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.primaryBaseBackground,
       body: child, // <-- displays the current route
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.symmetric(

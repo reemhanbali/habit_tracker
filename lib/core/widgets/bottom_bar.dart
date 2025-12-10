@@ -5,7 +5,6 @@ import 'package:habits_tracker_app/core/theme/app_dimensions.dart';
 import 'package:habits_tracker_app/core/theme/app_gradients.dart';
 import 'package:habits_tracker_app/core/theme/app_icon_type.dart';
 import 'package:habits_tracker_app/core/theme/app_shadows.dart';
-import 'package:habits_tracker_app/core/widgets/icon_button.dart';
 import 'package:habits_tracker_app/core/widgets/models/bottom_bar_item.dart';
 
 class BottomBar extends StatelessWidget {

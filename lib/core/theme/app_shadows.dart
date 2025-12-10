@@ -17,8 +17,8 @@ class AppShadows {
   static List<BoxShadow> box = [
     BoxShadow(
       color: _shadowColor1,
-      offset: Offset(58, 26),
-      blurRadius: 68,
+      offset: Offset(4, 4),
+      blurRadius: 10,
       spreadRadius: 0,
     ),
   ];

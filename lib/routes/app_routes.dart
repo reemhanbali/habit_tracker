@@ -33,9 +33,7 @@ class AppRoutes {
 
   static GoRouter create(bool hasSeenOnboarding) {
     return GoRouter(
-      initialLocation: hasSeenOnboarding
-          ? AppRoutes.auth
-          : AppRoutes.createAccountStep3,
+      initialLocation: hasSeenOnboarding ? AppRoutes.auth : AppRoutes.home,
       /*   redirect: (context, state) {
         final loggedIn = false; // TODO replace with real auth state
 

@@ -14,8 +14,8 @@ enum AppIconType {
   inactiveMedal("assets/icons/ic_medal_off.svg"),
   inactiveProfile("assets/icons/ic_profile_off.svg"),
   add("assets/icons/ic_add.svg"),
-  calendar("assets/icons/ic_calendar.svg"),
-  notification("assets/icons/ic_notification.svg");
+  calendar("assets/icons/ic_calendar.png"),
+  notification("assets/icons/ic_notification.png");
 
   final String assetPath;
   const AppIconType(this.assetPath);
