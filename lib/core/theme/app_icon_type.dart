@@ -15,6 +15,7 @@ enum AppIconType {
   inactiveProfile("assets/icons/ic_profile_off.svg"),
   add("assets/icons/ic_add.svg"),
   calendar("assets/icons/ic_calendar.png"),
+  points("assets/icons/ic_points.png"),
   notification("assets/icons/ic_notification.png");
 
   final String assetPath;
