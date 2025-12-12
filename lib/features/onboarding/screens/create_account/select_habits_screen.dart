@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
 import 'package:habits_tracker_app/core/theme/app_colors.dart';
 import 'package:habits_tracker_app/core/theme/app_dimensions.dart';
@@ -8,7 +7,6 @@ import 'package:habits_tracker_app/core/theme/app_text_styles.dart';
 import 'package:habits_tracker_app/core/widgets/asset_icon.dart';
 import 'package:habits_tracker_app/core/widgets/body_wrapper.dart';
 import 'package:habits_tracker_app/core/widgets/header.dart';
-import 'package:habits_tracker_app/core/widgets/icon_button.dart';
 import 'package:habits_tracker_app/core/widgets/models/button_size.dart';
 import 'package:habits_tracker_app/core/widgets/primary_button.dart';
 import 'package:habits_tracker_app/features/onboarding/screens/models/habit_ui_model.dart';

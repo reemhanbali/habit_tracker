@@ -4,6 +4,7 @@ enum AppIconType {
   google("assets/icons/ic_google.svg"),
   login("assets/icons/ic_login.svg"),
   arrowLeft("assets/icons/ic_arrow_left.svg"),
+  arrowRight("assets/icons/ic_arrow_right.svg"),
   clear("assets/icons/ic_clear.svg"),
   activeHome("assets/icons/ic_home.svg"),
   activeDiscovery("assets/icons/ic_discovery.svg"),

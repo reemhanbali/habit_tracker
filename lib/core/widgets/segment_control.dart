@@ -18,39 +18,45 @@ class SegmentControl<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(2.0),
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: AppColors.primaryBlack10,
-        borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
-        boxShadow: AppShadows.box,
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppDimensions.spacingMedium,
+        vertical: AppDimensions.spacing12,
       ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: segments.map((segment) {
-          final selected = segment.value == selectedValue;
-          return Expanded(
-            child: GestureDetector(
-              onTap: () => onValueChanged(segment.value),
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: AppDimensions.spacingMedium,
-                  vertical: AppDimensions.spacingXSmall,
-                ),
-                decoration: BoxDecoration(
-                  color: selected
-                      ? AppColors.primaryBaseWhite
-                      : Colors.transparent,
-                  borderRadius: BorderRadius.circular(
-                    AppDimensions.radiusLarge,
+      child: Container(
+        padding: const EdgeInsets.all(2.0),
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: AppColors.primaryBlack10,
+          borderRadius: BorderRadius.circular(AppDimensions.radiusLarge),
+          boxShadow: AppShadows.box,
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: segments.map((segment) {
+            final selected = segment.value == selectedValue;
+            return Expanded(
+              child: GestureDetector(
+                onTap: () => onValueChanged(segment.value),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: AppDimensions.spacingMedium,
+                    vertical: AppDimensions.spacingXSmall,
                   ),
+                  decoration: BoxDecoration(
+                    color: selected
+                        ? AppColors.primaryBaseWhite
+                        : Colors.transparent,
+                    borderRadius: BorderRadius.circular(
+                      AppDimensions.radiusLarge,
+                    ),
+                  ),
+                  child: segment.child,
                 ),
-                child: segment.child,
               ),
-            ),
-          );
-        }).toList(),
+            );
+          }).toList(),
+        ),
       ),
     );
   }

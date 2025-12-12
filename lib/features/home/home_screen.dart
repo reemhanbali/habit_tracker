@@ -29,10 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
         rightIcon: AssetIcon(AppIconType.notification.assetPath),
       ),
       body: Container(
-        padding: const EdgeInsets.symmetric(
-          horizontal: AppDimensions.spacingMedium,
-          vertical: AppDimensions.spacing12,
-        ),
         decoration: BoxDecoration(
           border: Border(
             bottom: BorderSide(color: AppColors.primaryBlack10, width: 1),
@@ -79,6 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
+            SizedBox(height: AppDimensions.spacingMedium),
             Profile(
               name: "Reem Alhanbali",
               avatarUrl: "https://avatar.iran.liara.run/public/70",
