@@ -139,3 +139,28 @@ DateTime previousMonth(DateTime date) {
 DateTime previousYear(DateTime date) {
   return DateTime(date.year - 1, 1, 1);
 }
+
+String weekDayName(int weekday) {
+  const names = [
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday',
+    'Sunday',
+  ];
+  return names[weekday - 1];
+}
+
+List<DateTime> getDatesWithinRange(DateTimeRange range) {
+  final List<DateTime> dates = [];
+  DateTime current = range.start;
+
+  while (!current.isAfter(range.end)) {
+    dates.add(current);
+    current = current.add(const Duration(days: 1));
+  }
+
+  return dates;
+}

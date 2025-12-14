@@ -11,8 +11,8 @@ import 'package:intl/intl.dart';
 class DatePicker extends StatefulWidget {
   final DateType dateType;
   final DateTime date;
-  final Function() nextDate;
-  final Function() previousDate;
+  final Function(DateTime) nextDate;
+  final Function(DateTime) previousDate;
 
   const DatePicker({
     super.key,
@@ -39,38 +39,48 @@ class _DatePickerState extends State<DatePicker> {
     selectedDateRange = _getSelectedDateRange(widget.dateType, widget.date);
   }
 
-  void _nextDate() {
+  void _selectDate(bool isNextDate) {
     switch (widget.dateType) {
       case DateType.week:
         {
-          final nextWeekDate = nextWeek(selectedDateRange.start);
+          final selectedDate = isNextDate
+              ? nextWeek(selectedDateRange.start)
+              : previousWeek(selectedDateRange.start);
 
           setState(() {
             selectedDateRange = _getSelectedDateRange(
               widget.dateType,
-              nextWeekDate,
+              selectedDate,
             );
           });
         }
 
       case DateType.month:
         {
-          final nextMonthDate = nextMonth(selectedDateRange.start);
+          final selectedDate = isNextDate
+              ? nextMonth(selectedDateRange.start)
+              : previousMonth(selectedDateRange.start);
 
           setState(() {
             selectedDateRange = _getSelectedDateRange(
               widget.dateType,
-              nextMonthDate,
+              selectedDate,
             );
           });
         }
       case DateType.year:
-        // TODO: Handle this case.
-        throw UnimplementedError();
+        final selectedDate = isNextDate
+            ? nextYear(selectedDateRange.start)
+            : previousYear(selectedDateRange.end);
+
+        setState(() {
+          selectedDateRange = _getSelectedDateRange(
+            widget.dateType,
+            selectedDate,
+          );
+        });
     }
   }
-
-  void _previousDate() {}
 
   @override
   Widget build(BuildContext context) {
@@ -94,13 +104,15 @@ class _DatePickerState extends State<DatePicker> {
         ),
         CustomIconButton(
           onTap: () {
-            widget.previousDate();
+            _selectDate(false);
+            widget.previousDate(selectedDateRange.start);
           },
           icon: AssetIcon(AppIconType.arrowLeft.assetPath),
         ),
         CustomIconButton(
           onTap: () {
-            widget.nextDate();
+            _selectDate(true);
+            widget.nextDate(selectedDateRange.start);
           },
           icon: AssetIcon(AppIconType.arrowRight.assetPath),
         ),
